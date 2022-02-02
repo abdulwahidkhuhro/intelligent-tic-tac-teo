@@ -6,8 +6,9 @@ public class IntelligentTicTacTeo implements ActionListener{
 	private Container container = window.getContentPane();
 	private GridLayout grid = new GridLayout(3,3,5,5);
 	private JButton[][] buttons = new JButton[3][3];
-	private final String o = "O";
-	private final String x = "X";
+	//For Computer X and for Player O
+	private final String _O = "O";
+	private final String _X = "X";
 	private boolean playerTurn = true;
 	
 	public IntelligentTicTacTeo(){
@@ -59,35 +60,10 @@ public class IntelligentTicTacTeo implements ActionListener{
 	}
 	
 	private void playerMove(JButton button){
-			button.setLabel("O");
-			machineMove(button);
+		button.setLabel("O");
+		machineMove();
 	}
 	
-	private void machineMove(JButton button){
-		int ith = 0, jth = 0;
-		for(int i = 0; i < buttons.length; i++){
-			for(int j = 0; j < buttons.length; j++){
-				if(buttons[i][j] == button){
-					ith = i;
-					jth = j;
-					break;
-				}
-			}
-		}
-		
-		if(ith == 0 && jth == 0 || ith == 0 && jth == 2 ||ith == 2 && jth == 0 || ith == 2 && jth == 2){
-			if(ith == 0 && jth == 0 || ith == 2 && jth == 2){
-				if(ith == 0 && jth == 0){
-					buttons[2][2].setLabel("X");
-				}else{
-					buttons[0][0].setLabel("O");
-				}
-			}else{
-				buttons[jth][ith].setLabel("X");
-				
-			}
-		}
-	}
 	private boolean hasWon(String label){
 		if(isMatched(buttons[0][0],buttons[0][1],buttons[0][2],label)){
 			return true;
@@ -116,6 +92,129 @@ public class IntelligentTicTacTeo implements ActionListener{
 			b3.setBackground(Color.red);
 		}
 		return isTrue;
+	}
+	
+	private int{} computerWinCheck(){
+		for(int i = 0,; i < buttons.length; i++){
+			if(isMatchedInRow(buttons[i][1],buttons[i][2],"X")){
+				return new int[]{i,0};
+			}
+		}
+		
+		for(int i = 0,j = 0; i < button.length; i++){
+			if(isMatchedInRow(buttons[i][0],buttons[i][2],"X")){
+				return new int[]{i,1};
+			}
+		}
+		
+		for(int j = 0; j < buttons.length; j++){
+			if(isMatchedInColumn(buttons[0][j],buttons[1][j],"X")){
+				return new int[]{2,j};
+			}
+		}
+		
+		for(int j = 0; j < buttons.length; j++){
+			if(isMatchedInColumn(buttons[0][j],buttons[2][j],"X")){
+				return new int[]{1,j};
+			}
+		}
+		
+		for(int j = 0; j < buttons.length; j++){
+			if(isMatchedInColumn(buttons[1][j],buttons[2][j],"X")){
+				return new int[]{0,j};
+			}
+		}
+		
+		if(isDiagonalMatched(buttons[0][0],buttons[1][1],"X")){
+			return new int[]{2,2};
+		}
+		if(isDiagonalMatched(buttons[0][0],buttons[2][2],"X")){
+			return new int[]{1,1}
+		}
+		if(isDiagonalMatched(button[1][1],buttons[2][2],"X")){
+			return new int[]{0,0};
+		}
+		return new int[]{-1,-1};
+		
+	}
+	
+	private boolean isMatchedInRow(Button b1, Button b2,String label){
+		return b1.getLabel().equals(label) && b2.getLabel().equals(label);
+	}
+	
+	private boolean isMatchedInColumn(Button b1,Button b2,String label){
+		return b1.getLabel().equals(label) && b2.getLabel().equals(label);
+	}
+	
+	private boolean isDiagonalMatched(Button b1, Button b2, String label){
+		return b1.getLabel().equals(label) && b2.getLabel().equals(label);
+	}
+	
+	private int userWinCheck(){
+		for(int i = 0,; i < buttons.length; i++){
+			if(isMatchedInRow(buttons[i][1],buttons[i][2],"O")){
+				return new int[]{i,0};
+			}
+		}
+		
+		for(int i = 0,j = 0; i < button.length; i++){
+			if(isMatchedInRow(buttons[i][0],buttons[i][2],"O")){
+				return new int[]{i,1};
+			}
+		}
+		
+		for(int j = 0; j < buttons.length; j++){
+			if(isMatchedInColumn(buttons[0][j],buttons[1][j],"O")){
+				return new int[]{2,j};
+			}
+		}
+		
+		for(int j = 0; j < buttons.length; j++){
+			if(isMatchedInColumn(buttons[0][j],buttons[2][j],"O")){
+				return new int[]{1,j};
+			}
+		}
+		
+		for(int j = 0; j < buttons.length; j++){
+			if(isMatchedInColumn(buttons[1][j],buttons[2][j],"O")){
+				return new int[]{0,j};
+			}
+		}
+		
+		if(isDiagonalMatched(buttons[0][0],buttons[1][1],"O")){
+			return new int[]{2,2};
+		}
+		if(isDiagonalMatched(buttons[0][0],buttons[2][2],"O")){
+			return new int[]{1,1}
+		}
+		if(isDiagonalMatched(button[1][1],buttons[2][2],"O")){
+			return new int[]{0,0};
+		}
+		return new int[]{-1,-1};
+		
+	}
+	
+	private int winPosibilitiesCheck(){
+		
+	}
+	
+	private void secondPlayer(){
+		
+	}
+	
+	private void mark(int[] index){
+		int i = index[0], j = index[1];
+		if(i >= 0 && j >= 0){
+			if(playerTurn){
+				if(!buttons[i][j].getLabel().isEmpty()){
+					button[i][j].setLabel("X");
+				}
+				playerTurn = false;
+			}else{
+				
+			}
+		}
+		
 	}
 	public static void main(String[] args){
 		new IntelligentTicTacTeo();
