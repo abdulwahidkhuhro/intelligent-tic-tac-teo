@@ -103,6 +103,22 @@ public class IntelligentTicTacTeo implements ActionListener{
 				return new int[]{0,0};
 			}
 		}
+		if(isDiagonalMatched(buttons[0][2],buttons[1][1],"X")){
+			if(buttons[2][0].getLabel().isEmpty()){
+				return new int[]{2,0};
+			}
+			
+		}
+		if(isDiagonalMatched(buttons[0][2],buttons[2][0],"X")){
+			if(buttons[1][1].getLabel().isEmpty()){
+				return new int[]{1,1};
+			}
+		}
+		if(isDiagonalMatched(buttons[2][0],buttons[1][1],"X")){
+			if(buttons[0][2].getLabel().isEmpty()){
+				return new int[]{0,2};
+			}
+		}
 		return new int[]{-1,-1};
 		
 	}
@@ -174,6 +190,23 @@ public class IntelligentTicTacTeo implements ActionListener{
 				return new int[]{0,0};
 			}
 		}
+		
+		if(isDiagonalMatched(buttons[0][2],buttons[1][1],"O")){
+			if(buttons[2][0].getLabel().isEmpty()){
+				return new int[]{2,0};
+			}
+			
+		}
+		if(isDiagonalMatched(buttons[0][2],buttons[2][0],"O")){
+			if(buttons[1][1].getLabel().isEmpty()){
+				return new int[]{1,1};
+			}
+		}
+		if(isDiagonalMatched(buttons[2][0],buttons[1][1],"O")){
+			if(buttons[0][2].getLabel().isEmpty()){
+				return new int[]{0,2};
+			}
+		}
 		return new int[]{-1,-1};
 		
 	}
@@ -205,8 +238,14 @@ public class IntelligentTicTacTeo implements ActionListener{
 			return new int[]{1,1};
 		}else if(buttons[1][2].getLabel().isEmpty()){
 			return new int[]{1,2};
+		}else if(buttons[2][0].getLabel().isEmpty()){
+			return new int[]{2,0};
+		}else if(buttons[2][1].getLabel().isEmpty()){
+			return new int[]{2,1};
+		}else if(buttons[2][2].getLabel().isEmpty()){
+			return new int[]{2,2};
 		}
-		return new int[]{2,2};
+		return new int[]{-1,-1};
 	}
 	
 	private void secondPlayer(){
